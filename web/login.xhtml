@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This is a template client.
+-->
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 template="/mainTemplate.xhtml">
+
+
+    <ui:define name="title">
+        Login
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form >
+            <h:panelGrid columns="2">
+                <h:outputLabel value="User Name" for="j_username"/>
+                <h:inputText id="j_username"
+                               value="#{loginBean.username}"
+                               required="true"/>
+                <h:outputLabel value="Password" for="j_password"/>
+                <h:inputSecret id="j_password"
+                                 value="#{loginBean.password}"
+                                 required="true"/>
+            </h:panelGrid>
+            <h:commandButton action="#{loginBean.doLogin}" value="Login"/>
+            <h:messages style="color: red;"/>
+            </h:form>
+
+
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

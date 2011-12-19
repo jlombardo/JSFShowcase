@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This demo is similar to guess2.xhtml except that we use a combination of
+    JSF component validation (required only) and server-side validation lgoic
+    in the ManagedBean NumberGuess3.java. By using the method validateGuess,
+    we can write very complex validation algorithms if we choose.
+
+    However, the "required" validation feature of <h:inputText is needed in
+    this case because the ManagedBean will not detect a null value. So we
+    have to do that here.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                      xmlns:c="http://java.sun.com/jsp/jstl/core"
+                      xmlns:cc="http://java.sun.com/jsf/composite"
+                template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo4_v3_page_title}
+        </ui:define>
+    
+        <ui:define name="top">
+            <ui:include src="/top.xhtml"/>
+        </ui:define>
+
+        <!-- Note the use of inline styles to override global styles -->
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+               <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <h:form>
+               <h:outputLabel value="Total Guesses: #{numberGuess3.totalGuessesForUser}" />
+               <h:panelGrid columns="2">
+                    <h:outputLabel value="Guess a number from #{numberGuess3.minValue} to #{numberGuess3.maxValue}" for="numGuess" />
+                    <!-- Note: most validation is in the ManagedBean. But required is needed here -->
+                    <h:inputText id="numGuess" value="#{numberGuess3.guess}" required="true" requiredMessage="Number is required" validator="#{numberGuess3.validateGuess}"/>
+                    <h:commandButton value="Check Guess"
+                        style="font-family:Palatino;font-style:italic"
+                        action="#{numberGuess3.processGuess}"/>
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            <ui:include src="/bottom.xhtml"/>
+        </ui:define>
+
+</ui:composition>

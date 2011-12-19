@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This page is a client of the mainTemplate. It does not use an include and
+    it does use an html root tag.
+
+    The html root tag lets you mix normal html tags with JSF/Facelets tags.
+    This may be useful in certain situations, however, the html tags do not
+    have the power of JSF/Facelets tags (event handling, robuts attributes, etc.).
+
+    Also, the lack of included content in this example means that page1 and page2
+    will both need to be changed if common content, such as the top  or
+    bottom sections change.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <body>
+        
+        <ui:composition template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo3_v1_page_title}
+        </ui:define>
+            
+            <ui:define name="top">
+                <h1>my top content, no include</h1>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:outputText value="my page 1 body content"/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                
+                <p>Bottom</p>
+                | <h:link outcome="page1.xhtml" value="Demo 3: page 1"/>
+                | <h:link outcome="page2.xhtml" value="Demo 3: page 2"/>
+                | <h:link outcome="page3.xhtml" value="Demo 3: page 3"/>
+                | <h:link outcome="page4.xhtml" value="Demo 3: page 4"/>
+                | <h:link outcome="page5.xhtml" value="Demo 3: page 5"/>
+                | <h:link outcome="/index.xhtml" value="Back to Home"/> |
+                    
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

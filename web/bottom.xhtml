@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This is not a template client. This is just content that may be
+    included by a template client so that when the content changes you do
+    not need to change it in every client. Basically, this is global content.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <!--
+        Notice the nexted panelGrid tags. A panelGrid is useful for
+        creating content that is layed out as if using a table (rows and
+        columns). In this example the rows are calculated automatically
+        by the panelGrid based on the content of that grid.Each child tag
+        within the panelGrid is a new row. Here the outer grid has just
+        one child tag: another panelGriod. But the inner panelGrid has
+        several h:link tags. Instead of treating these as separate rows,
+        the columns attribute says to treat them as columns in a single row.
+
+    <h:panelGrid columns="1">
+        <h:outputText style="font-weight: bold;" value="Bottom"/>
+        <h:panelGrid id="row1" bodyrows="4" columns="6">
+            <h:link outcome="/demo3/page1.xhtml" value=" Demo 3: page 1 "/>
+            <h:link outcome="/demo3/page2.xhtml" value=" Demo 3: page 2 "/>
+            <h:link outcome="/demo3/page3.xhtml" value=" Demo 3: page 3" />
+            <h:link outcome="/demo3/page4.xhtml" value=" Demo 3: page 4 "/>
+            <h:link outcome="/demo3/page5.xhtml" value=" Demo 3: page 5 "/>
+            <h:outputText value=""/>
+
+            <h:link outcome="/demo4/guess1.xhtml" value=" Demo 4: version 1 "/>
+            <h:link outcome="/demo4/guess2.xhtml" value=" Demo 4: version 2 "/>
+            <h:link outcome="/demo4/guess3.xhtml" value=" Demo 4: version 3 "/>
+            <h:link outcome="/demo4/guess4.xhtml" value=" Demo 4: version 4 "/>
+            <h:outputText value=""/>
+            <h:outputText value=""/>
+
+            <h:link outcome="/demo5/grid1.xhtml" value=" Demo 5: version 1 "/>
+            <h:link outcome="/demo5/grid2.xhtml" value=" Demo 5: version 2 "/>
+            <h:outputText value=""/>
+            <h:outputText value=""/>
+            <h:outputText value=""/>
+            <h:outputText value=""/>
+
+            <h:link outcome="/index.xhtml" value=" Back to Home "/>
+        </h:panelGrid>
+    </h:panelGrid>
+-->
+
+<p align="center">
+    | <h:link value="Demo 3: page 1" outcome="/demo3/page1" /> 
+    | <h:link value="Demo 3: page 2" outcome="/demo3/page2" /> 
+    | <h:link value="Demo 3: page 3" outcome="/demo3/page3" /> 
+    | <h:link value="Demo 3: page 4" outcome="/demo3/page4" /> 
+    | <h:link value="Demo 3: page 5" outcome="/demo3/page5" /> |
+    <br/>
+    | <h:link value="Demo 4: page 1" outcome="/demo4/guess1" />
+    | <h:link value="Demo 4: page 2" outcome="/demo4/guess2" />
+    | <h:link value="Demo 4: page 3" outcome="/demo4/guess3" />
+    | <h:link value="Demo 4: page 4" outcome="/demo4/guess4" /> |
+    <br/>
+    | <h:link value="Demo 5: page 1" outcome="/demo5/grid1" />
+    | <h:link value="Demo 5: page 2" outcome="/demo5/grid2" />
+    | <h:link value="Demo 5: page 3" outcome="/demo5/grid3" /> |
+    <br/>
+    | <h:link value="Demo 6: page 1" outcome="/demo6/page1" /> |
+    <br/>
+    | <h:link value="Back to Home" outcome="/index" /> |
+</p>
+</ui:composition>

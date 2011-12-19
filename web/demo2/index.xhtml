@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    DEMO 2:
+    This demo is the same as the first, except that it uses a Managed Bean that
+    specifies SessionScoped, which means that it will remember data over
+    several requests for a given user. In this demo, the data remembered is
+    the count of user inputs.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+    <h:head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+        <meta name="Keywords" content="JSF WCTC JAVA"/>
+        <meta name="Description" content="A basic JSF v2 home page without a template"/>
+        <meta name="Robots" content="index,follow"/>
+
+        <title>Simple JSF v2 Page, No Template</title>
+
+        <h:outputStylesheet name="default.css" library="css" />
+        <h:outputStylesheet name="cssLayout.css" library="css" />
+        <link rel="SHORTCUT ICON" href="/FirstJSF2/favicon.ico"/>
+    </h:head>
+    <h:body>
+        <h1>Simple Headline as html tag. Better to use JSF tag here</h1>
+
+        <!--
+            In the code that follows are JSF EL tags (begin with a pound sign)
+            demo1Bean is the default instance variable for the server=-side Demo1Bean class, and
+            msg is a private property that will cause either a getter or setter
+            method to be called. processRequest is a method of the bean. Note that
+            the JSF plumbing automatically takes care of the data transport from
+            view to server and back again.
+
+            IMPORTANT: by default html comments will break the following code.
+            To resolve this, you must set a <context-param> tag in the web.xml
+            file to SKIP comments. Go look at this file now.
+        -->
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel id="theCount" value="User Inputs:"/>
+                <h:outputLabel id="countLabel" value="#{demo2Bean.userInputCount}"/>
+                <h:outputLabel id="msgLabel" style="font-weight: bold;" value="Value from Managed Bean:"/>
+                <!-- call getMsg method of bean -->
+                <h:outputLabel id="msgLabel2" style="font-weight: bold;color:green;" value="#{demo2Bean.msg}"/>
+                <h:outputLabel id="msgLabel3" value="Enter a new value:"/>
+                <!-- call aetMsg method of bean with user input -->
+                <h:inputText id="msgInput" value="#{demo2Bean.msg}"/>
+                <!-- call processRequest method of bean -->
+                <h:commandButton id="cmdMsg" value="Submit" action="#{demo2Bean.processRequest}"/>
+            </h:panelGrid>
+        </h:form>
+
+        <h:link style="position: relative; top: 20px;" value="Back to Home" outcome="/index"/>
+
+
+
+    </h:body>
+
+</html>
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                         http://www.springframework.org/schema/security
+                         http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                         http://www.springframework.org/schema/context 
+                         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+ 
+        
+    <!-- Scans within the base package of the application for @Components to configure as beans -->
+    <context:component-scan base-package="edu.wctc.bean.demo5"/>
+    <context:annotation-config/>
+
+    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled">
+    </global-method-security>
+
+    <http auto-config="true" access-denied-page="/faces/accessDenied.xhtml">
+            
+        <port-mappings>
+            <port-mapping http="8080" https="8181"/>
+        </port-mappings>
+
+        <intercept-url 
+            pattern="/faces/admin/**" 
+            access="ROLE_ADMIN" requires-channel="https" />
+        <intercept-url 
+            pattern="/faces/member/**" 
+            access="ROLE_MEMBER, ROLE_ADMIN" requires-channel="https" />
+        <intercept-url 
+            pattern="/**" 
+            access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        
+        <!-- Use O/S provided login window
+        <http-basic />
+        -->
+        <!-- Use custom form for login -->
+        <form-login 
+            login-processing-url="/j_spring_security_check"
+            login-page="/faces/login.xhtml" />
+            
+        <logout logout-success-url="/faces/index.xhtml" />
+
+    </http>
+ 
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource" />
+            <!-- if not using a database for accounts, hard-code them here
+            <user-service>
+                <user name="admin" password="????" authorities="ROLE_ADMIN" />
+                <user name="member" password="????" authorities="ROLE_MEMBER" />
+            </user-service>
+            -->
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- use this to set a properties file location and provide access
+         to key=value pairs via Spring EL expressions (see dataSource below) -->
+    <context:property-placeholder location="file:/temp/jdbc.config.properties"/>
+
+    <!-- Database connection properties defined in jdbc.config.properties file
+         (see above) and accessed via Spring EL. Note that the users and authorities
+         table schema are dictated by Spring (see Spring documentation) -->
+    <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+      <beans:property name="driverClassName" value="${jdbc.driver.class}" />
+      <beans:property name="url" value="${jdbc.url}" />
+      <beans:property name="username" value="${jdbc.username}" />
+      <beans:property name="password" value="${jdbc.password}" />
+    </beans:bean>
+
+    <!-- Automatically receives AuthenticationEvent messages -->
+    <beans:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+    </beans:beans>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    DEMO 6: action vs. actionListener
+    This demo shows the difference between the action attribute and the 
+    actionListener attribute of a JSF 2 component.
+
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                template="/mainTemplate.xhtml">
+
+
+    <ui:define name="title">
+        Member Access Required
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:panelGrid columns="1" cellspacing="8">
+            <h:outputText style="font-size: xx-large;" value="Welcome Member :: Secure Page 2"/>
+            <h:link value="&lt;&lt; Back to Member Page 1" outcome="page1" />
+        </h:panelGrid>
+	
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

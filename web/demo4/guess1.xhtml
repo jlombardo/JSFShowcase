@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    In this demo we'll communicate with a JSF ManagedBean and play the
+    Number Guess game. We'll demonstrate several things here, but the main
+    purpose is to show one way to do validation on form fields. We'll validate
+    the numGuess inputText field using two built-in JSF component features.
+
+    The first built-in JSF component validation feature is the "required" attribute
+    of the <h:inputText tag. Setting this to true and then setting the
+    "requiredMessage" attribute gives you automatic control over empty input.
+
+    Added to that we'll use a child tag, "<f:validateLongRange " to also
+    enforce data input between 1 and 10.
+
+    Notice that there is no server-side code needed for validation because the
+    JSF components are doing all the work.
+
+    There are many other built-in validation tools like this, but you'll have
+    to do some research to find them.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                      xmlns:c="http://java.sun.com/jsp/jstl/core"
+                      xmlns:cc="http://java.sun.com/jsf/composite"
+                template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo4_v1_page_title}
+        </ui:define>
+    
+        <ui:define name="top">
+            <ui:include src="/top.xhtml"/>
+        </ui:define>
+
+        <!-- Note the use of inline styles to override global styles -->
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+               <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <h:form>
+               <h:outputLabel value="Total Guesses: #{numberGuess1.totalGuessesForUser}" />
+               <h:panelGrid columns="2">
+                    <h:outputLabel value="Guess a number from #{numberGuess1.minValue} to #{numberGuess1.maxValue}" for="numGuess" />
+                    <!-- Note the use of validation attributes for this tag to provide client-side validation -->
+                    <h:inputText id="numGuess" value="#{numberGuess1.guess}" 
+                                 required="true" requiredMessage="A Number is required"
+                                 validatorMessage="You must guess a number between #{numberGuess1.minValue} and #{numberGuess1.maxValue}" >
+                        <f:validateLongRange minimum="#{numberGuess1.minValue}" maximum="#{numberGuess1.maxValue}" for="numGuess" />
+                    </h:inputText>
+                    <h:commandButton value="Check Guess"
+                        style="font-family:Palatino;font-style:italic"
+                        action="#{numberGuess1.processGuess}"/>
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            <ui:include src="/bottom.xhtml"/>
+        </ui:define>
+
+</ui:composition>

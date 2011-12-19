@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    DEMO 5: Version 1:
+    In this demo we'll combine a JSF dataTable component with database access.
+    But the big difference in this demo is that the ManagedBean is of a very
+    different type. JSF has its own ManagedBean classes, but there is another
+    type called a CDI ManagedBean. CDI stands for Contexts and Dependency
+    Injection and is new to JEE6. Basically what this does is it gives you
+    numerous "Spring" like features, including dependency injection, that
+    make life easier for programmers. Check out the "EmployeeController"
+    class, which is the CDI ManagedBean in this demo.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                template="/mainTemplate.xhtml">
+
+    <ui:define name="title">
+        #{i18n.demo5_v1_page_title}
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <!-- Note the use of inline styles to override global styles -->
+    <ui:define name="content">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+
+        <h:form id="form3">
+            <p:dataTable id="firstTable" 
+                         value="#{simpleDataTableBean.plantCategories}" 
+                         var="cat" selectionMode="single"  rows="10"
+                         rowSelectListener="#{simpleDataTableBean.onRowSelect}"
+                         selection="#{simpleDataTableBean.categorySelected}"
+                         onRowSelectUpdate="matchTable">
+                
+                <f:facet name="header">
+                    Plant Categories
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Category Name" />
+                    </f:facet>
+                    <h:outputText value="#{cat}" />
+                </p:column>
+
+            </p:dataTable>
+            
+            <p:dataTable id="matchTable" 
+                         value="#{simpleDataTableBean.matchList}" 
+                         var="plant">
+                
+                <f:facet name="header">
+                    Plant List
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Plant Name" />
+                    </f:facet>
+                    <h:outputText value="#{plant.name}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Plant Cost" />
+                    </f:facet>
+                    <h:outputText value="#{plant.cost}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

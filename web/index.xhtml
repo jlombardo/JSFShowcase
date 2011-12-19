@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    ABOUT THIS PROJECT:
+
+    This project provides a series of demos that demonstrate various JSF v2
+    and facelets coding techniques. Most view pages for the demos are locsted
+    in separate folders, such as demo1, demo2 and so forth. Only global pages
+    are located in the root directory.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+    <h:head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+        <meta name="Keywords" content="JSF WCTC JAVA"/>
+        <meta name="Description" content="A basic JSF v2 home page without a template"/>
+        <meta name="Robots" content="index,follow"/>
+
+        <title>Simple JSF v2 Page, No Template</title>
+
+        <h:outputStylesheet name="default.css" library="css" />
+        <h:outputStylesheet name="cssLayout.css" library="css" />
+        <link rel="SHORTCUT ICON" href="/JSFShowcase/favicon.ico"/>
+    </h:head>
+    <h:body>
+        <h1>Welcome to WCTC's JavaServer Faces Demo Project<br/>
+            <span style="font-size:small;color:blue;">(Updated Dec. 19, 2011)</span></h1>
+        <p>This Netbeans project provides a variety of demonstrations of JSF v2
+        and facelets programming techniques, using both JSF Managed Beans and
+        CDI implementations, plus Spring Framework core and security services.</p>
+        <h3>Supporting HTML Comments</h3>
+        <p>In the source code for the XHTML pages you will find HTML comments. Normally,
+           these comments are not allowed near some JSF/Facelets tags. However, this can
+           be allowed by configuring your web app to allow them. Add this to your
+           web.xml file:</p>
+        <pre>
+            &lt;context-param&gt;
+                &lt;param-name&gt;javax.faces.FACELETS_SKIP_COMMENTS&lt;/param-name&gt;
+                &lt;param-value&gt;true&lt;/param-value&gt;
+            &lt;/context-param&gt;
+        </pre>
+        <h3>PrimeFaces v2.2.1 JSF Components</h3>
+        <p>Many JSF components used in this version are from PrimeFaces v2.2.1.
+            Other 3rd party libraries needed are the Spring core and security .jar files,
+            plus the the JDBC driver for MS-SQL Server.</p>
+        <p>This project has been tested only on Glassfish 3.1.1. 
+            which contains Mojarra 2.1.0.
+        </p>
+
+        <h1>Demos available in this Project</h1>
+        <ul>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 1" outcome="/demo1/index" />:
+                Simple JSF/Facelets page, Request Scoped Managed Bean, no template</li>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 2" outcome="/demo2/index" />:
+                Simple JSF/Facelets page, Session Scoped Managed Bean, no template</li>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 3" outcome="/demo3/page1" />:
+                Simple JSF/Facelets client pages using template with and without include tags. Also,
+                beginning with this demo i18n properties files (see "default package") are used
+                for some of the text in the view layer (mainly the title, but the minValue and maxValue
+                as well). "i18n" is the term used for internationalizing an application. This is done
+                by providing a common base name for the file, plus a language extension, such as
+                "en" for English or "de" for German.
+            </li>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 4" outcome="/demo4/guess1" />:
+                Simple Number Guess game demonstrating multiple JSF/Facelets features including
+                SessionScoped ManagedBean, Conversion and Validation, both client-side and server-side</li>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 5" outcome="/demo5/grid1" />:
+                Data-bound grid demo with JSF dataTable vs. PrimeFaces dataTable, plus
+                Spring JDBC access and CDI ManagedBean vs. JSF ManagedBean, providing an easy form of
+                dependency injection</li>
+            <li style="margin-bottom: 10px;"><h:link value="Demo 6" outcome="/demo6/page1" />:
+                This demo shows the differences between the 'action' attribute and the
+                'actionListener' attribute of a JSF 2 component, such as 'commandButton'</li>
+            <li style="margin-bottom: 10px;"><h:link value="Secured Page for Admin" outcome="/admin/page1" />:
+                This page demonstrates secure access via Spring Security and 
+                forces a login for a user with username=admin and password=admin</li>
+            <li style="margin-bottom: 10px;"><h:link value="Secured Page for Members" outcome="/member/page1" />:
+                This page demonstrates secure access via Spring Security and 
+                forces a login for a user with username=member and password=member</li>
+        </ul>
+
+
+    </h:body>
+
+</html>
+
