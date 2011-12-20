@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    DEMO 5: Version 1:
+    In this demo we'll combine a JSF dataTable component with database access.
+    But the big difference in this demo is that the ManagedBean is of a very
+    different type. JSF has its own ManagedBean classes, but there is another
+    type called a CDI ManagedBean. CDI stands for Contexts and Dependency
+    Injection and is new to JEE6. Basically what this does is it gives you
+    numerous "Spring" like features, including dependency injection, that
+    make life easier for programmers. Check out the "EmployeeController"
+    class, which is the CDI ManagedBean in this demo.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                template="/mainTemplate.xhtml">
+
+    <ui:define name="title">
+        #{i18n.demo5_v1_page_title}
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <!-- Note the use of inline styles to override global styles -->
+    <ui:define name="content">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+
+        <h:form id="form1">
+            <h:dataTable id="empTable" rows="10" value="#{employeeController.all}"
+             var="emp" rowClasses="list-row-odd, list-row-even" width="60%">
+                <f:facet name="header">
+                    Standard JSF dataTable with row styling
+                </f:facet>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name" />
+                    </f:facet>
+                    <h:outputText value="#{emp.lastName}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name" />
+                    </f:facet>
+                    <h:outputText value="#{emp.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Hire Date" />
+                    </f:facet>
+                    <h:outputText value="#{emp.hireDate}">
+                        <f:convertDateTime pattern="MM-dd-yy" />
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

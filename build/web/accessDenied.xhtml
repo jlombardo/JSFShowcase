@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This is a template client.
+-->
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                template="/mainTemplate.xhtml">
+
+
+    <ui:define name="title">
+        Access Denied
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:panelGrid columns="1" cellspacing="8">
+            <h:outputText style="font-size: xx-large;" value="Access Denied"/>
+            <h:link value="&lt;&lt; Back to Home Page" outcome="index" />
+            <a href="/JSFShowcase/j_spring_security_logout">Just Log Me Out</a>
+        </h:panelGrid>
+	
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

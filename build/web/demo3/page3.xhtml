@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This page is a client of the mainTemplate. It DOES use includes and
+    it does use an html root tag.
+
+    The inclusion of the include for the top section means that this page
+    and any other pages (page4, e.g.) that use the same top section will be
+    easier to maintain because only the top.xhtml file needs to be edited.
+    Those edits will be included on this page and any other pages that use
+    that section.
+
+    The html root tag lets you mix normal html tags with JSF/Facelets tags.
+    This may be useful in certain situations, however, the html tags do not
+    have the power of JSF/Facelets tags (event handling, robuts attributes, etc.).
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <body>
+        
+        <ui:composition template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo3_v3_page_title}
+        </ui:define>
+            
+            <ui:define name="top">
+                <ui:include src="/top.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:outputText value="my page 3 content"/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <ui:include src="/bottom.xhtml"/>
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

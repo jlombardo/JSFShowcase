@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    DEMO 5: Version 2
+    This demo is exactly the same as Version 1, but uses the PrimeFaces
+    data grid which is much more powerful. Note the addition of the
+    "p" namespace for primefaces.
+
+    NOTE: Your instructor switched to Primefaces 2.2-RC2.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                template="/mainTemplate.xhtml">
+
+
+    <ui:define name="title">
+        #{i18n.demo5_v2_page_title}
+    </ui:define>
+
+    <ui:define name="top">
+        <ui:include src="/top.xhtml"/>
+    </ui:define>
+
+    <!-- Note the use of inline styles to override global styles -->
+    <ui:define name="content">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+
+        <p:ajaxStatus style="width:16px;height:16px;">
+            <f:facet name="start">
+                <h:panelGrid id="load" columns="2">
+                <h:graphicImage value="/ajax-loader.gif" />
+                <h:outputText value=" Loading..." />
+                </h:panelGrid>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
+        <h:panelGrid id="pg" columns="1">
+            <h:form>
+                <p:dataTable id="empTable" var="emp" value="#{employeeController.lazyModel}"
+                             paginator="true" paginatorPosition="bottom" rows="5" lazy="true"
+                             selectionMode="single" selection="#{employeeController.selectedEmployee}"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <f:facet name="header">
+                        PrimeFaces dataTable with Ajax Sorting and Paginator
+                    </f:facet>
+
+                    <p:column sortBy="#{emp.lastName}">
+                        <f:facet name="header">
+                            <h:outputText value="Last Name" />
+                        </f:facet>
+                        <h:outputText value="#{emp.lastName}" />
+                    </p:column>
+                    <p:column sortBy="#{emp.firstName}">
+                        <f:facet name="header">
+                            <h:outputText value="First Name" />
+                        </f:facet>
+                        <h:outputText value="#{emp.firstName}"/>
+                    </p:column>
+                    <p:column sortBy="#{emp.hireDate}">
+                        <f:facet name="header">
+                            <h:outputText value="Hire Date" />
+                        </f:facet>
+                        <h:outputText value="#{emp.hireDate}">
+                            <f:convertDateTime pattern="MM-dd-yy" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </h:panelGrid>
+    </ui:define>
+
+    <ui:define name="bottom">
+        <ui:include src="/bottom.xhtml"/>
+    </ui:define>
+
+</ui:composition>

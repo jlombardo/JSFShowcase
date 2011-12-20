@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This demo is similar to guess1.xhtml except that we do not use JSF
+    component features to do validation. Instead, the ManagedBean NumberGuess2
+    does the work using annotations. This is a really easy way to do
+    validation on form components. Please see the NumberGuess2.java file
+    to see how it works.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                      xmlns:c="http://java.sun.com/jsp/jstl/core"
+                      xmlns:cc="http://java.sun.com/jsf/composite"
+                template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo4_v2_page_title}
+        </ui:define>
+    
+        <ui:define name="top">
+            <ui:include src="/top.xhtml"/>
+        </ui:define>
+
+        <!-- Note the use of inline styles to override global styles -->
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+               <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <h:form>
+               <h:outputLabel value="Total Guesses: #{numberGuess2.totalGuessesForUser}" />
+               <h:panelGrid columns="2">
+                    <h:outputLabel value="Guess a number from #{numberGuess2.minValue} to #{numberGuess2.maxValue}" for="numGuess" />
+                    <!-- Note: all validation is in the ManagedBean -->
+                    <h:inputText id="numGuess" value="#{numberGuess2.guess}" />
+                    <h:commandButton value="Check Guess"
+                        style="font-family:Palatino;font-style:italic"
+                        action="#{numberGuess2.processGuess}"/>
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            <ui:include src="/bottom.xhtml"/>
+        </ui:define>
+
+</ui:composition>

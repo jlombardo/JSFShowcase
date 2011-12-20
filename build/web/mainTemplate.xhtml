@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This is the main template for the project. It is used by many, but not
+    all of the pages. Some pages demonstrate how to create JSF views without
+    the use of a template, and others demonstrate how to use the template by
+    feeding content into it. The value of a template is that you have one
+    file that controls the format for multiple pages. This makes maintenance
+    simpler. But to really take advantage of templates you must use include
+    tags in your client pages. A client page is a page that feeds content into
+    a template. These client pages can include content from other files.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="default.css" library="css" />
+        <h:outputStylesheet name="cssLayout.css" library="css" />
+        <link rel="SHORTCUT ICON" href="/FirstJSF2/favicon.ico"/>
+        <title><ui:insert name="title">Placeholder Title</ui:insert></title>
+
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="top">
+            <ui:insert name="top">Top</ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom" class="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

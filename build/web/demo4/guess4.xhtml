@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    This demo combines JSF component validation features with a custom
+    validator class that can be reused anywhere in a project. This decouples
+    the validation logic from a specific ManagedBean, while providing
+    more robust implementation logic than is provided by standard JSF
+    validation components.
+
+    In addition, the custom validator class edu.wctc.bean.demo4.CustomNumericRangeVallidator
+    uses lookup values from a properties file, which is also useful for
+    internationalization of text in the view layer. See the comments in the
+    edu.wctc.bean.resources.i18n.properties file for more informatiion.
+
+    However, the "required" validation feature of <h:inputText is needed in
+    this case because the ManagedBean will not detect a null value. So we
+    have to do that here.
+-->
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                      xmlns:c="http://java.sun.com/jsp/jstl/core"
+                      xmlns:cc="http://java.sun.com/jsf/composite"
+                template="/mainTemplate.xhtml">
+
+        <ui:define name="title">
+            #{i18n.demo4_v4_page_title}
+        </ui:define>
+    
+        <ui:define name="top">
+            <ui:include src="/top.xhtml"/>
+        </ui:define>
+
+        <!-- Note the use of inline styles to override global styles -->
+        <ui:define name="content">
+
+            <h:form>
+                <!-- use a built-in JSF converter -->
+               <h:outputText id="date" value="#{numberGuess4.date}">
+                   <f:convertDateTime dateStyle="short"/>
+               </h:outputText>
+               <h:outputLabel value="Total Guesses: #{numberGuess4.totalGuessesForUser}" />
+               <h:panelGrid columns="1">
+                        <h:panelGrid columns="3">
+                        <h:outputLabel value="Guess a number from #{numberGuess4.minValue} to #{numberGuess4.maxValue}" for="numGuess" />
+                        <!-- Note: most validation is in the ManagedBean. But required is needed here -->
+                        <h:inputText id="numGuess" value="#{numberGuess4.guess}" required="true" requiredMessage="Number is required">
+                            <f:validator validatorId="NumericRangeRequirement" for="numGuess" />
+                        </h:inputText>
+                        <!-- this works for all messages -->
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        <!-- The singular version below only works for JSF built-in or custom validator messages;
+                             it will not work for messsages added by the ManagedBean -->
+                        <!--h:message id="resultInfo" errorStyle="color: red" infoStyle="color: green" for="numGuess" / -->
+                    </h:panelGrid>
+                    <h:commandButton value="Check Guess"
+                        style="font-family:Palatino;font-style:italic"
+                        action="#{numberGuess4.processGuess}"/>
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            <ui:include src="/bottom.xhtml"/>
+        </ui:define>
+
+</ui:composition>

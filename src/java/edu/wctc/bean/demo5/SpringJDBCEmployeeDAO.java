@@ -32,7 +32,7 @@ public class SpringJDBCEmployeeDAO implements IEmployeeDAO, Serializable {
 
     @Override
     public List<Employee> findAll() throws DataAccessException {
-        List employeeList = new ArrayList<Employee>();
+        List<Employee> employeeList = new ArrayList<Employee>();
         
         final String sql =
             "SELECT * FROM EMPLOYEE";
