@@ -38,7 +38,7 @@ public class EmployeeController implements Serializable {
     private Employee selectedEmployee;
 //    private static List<Employee> empList;
     private LazyDataModel<Employee> lazyModel;
-    private EmployeeService empService;
+    private IEmployeeService empService;
     private transient ApplicationContext ctx;
 
 
@@ -46,7 +46,7 @@ public class EmployeeController implements Serializable {
     public EmployeeController() {
         ctx = FacesContextUtils
                 .getWebApplicationContext(FacesContext.getCurrentInstance());
-        empService = (EmployeeService)ctx.getBean("employeeService");
+        empService = (IEmployeeService)ctx.getBean("employeeService");
         
         lazyModel = new LazyDataModel<Employee>() {
 
@@ -86,11 +86,11 @@ public class EmployeeController implements Serializable {
                .findPage(empList, firstRecord, pageSize, sortField, sortOrder);
     }
 
-    public EmployeeService getEmpService() {
+    public IEmployeeService getEmpService() {
         return empService;
     }
 
-    public void setEmpService(EmployeeService empService) {
+    public void setEmpService(IEmployeeService empService) {
         this.empService = empService;
     }
 

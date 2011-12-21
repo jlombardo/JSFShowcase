@@ -75,7 +75,7 @@
     <!-- For web apps use the app server's transaction management feature -->
     <beans:bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
     <!-- enable the configuration of transactional behavior based on annotations -->
-    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="false" />
         
     <!-- Prefer jndi access to server-managed connection pool (see above)
          Database connection properties defined in jdbc.config.properties file
