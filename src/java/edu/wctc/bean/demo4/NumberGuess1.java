@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class NumberGuess1 implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int guess;
     private int minValue = 1;
     private int maxValue = 10;

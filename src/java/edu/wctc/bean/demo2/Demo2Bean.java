@@ -1,6 +1,7 @@
 package edu.wctc.bean.demo2;
 
 // IMPORTANT: this demo uses the JSF faces version of these classes
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,9 +14,9 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class Demo2Bean {
+public class Demo2Bean implements Serializable {
+    private static final long serialVersionUID = 1L;
     // This count will be maintained during an HttpSession
-
     private int userInputCount;
     private String msg = "Hello World";
 

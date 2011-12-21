@@ -21,7 +21,7 @@ import javax.faces.validator.ValidatorException;
 @ManagedBean
 @SessionScoped
 public class NumberGuess3 implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     private int guess;
     private int minValue = 1;
     private int maxValue = 10;

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,10 +20,12 @@ import org.springframework.stereotype.Repository;
  * @author jlombardo
  */
 @Repository
-@Scope("session")
+@Scope("singleton")
 public class SpringJDBCEmployeeDAO implements IEmployeeDAO, Serializable {
     private static final long serialVersionUID = 1L;
     private JdbcTemplate jdbcTemplate;
+    @Value("${db.vendor}")
+    private String dbVendor;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -76,23 +78,50 @@ public class SpringJDBCEmployeeDAO implements IEmployeeDAO, Serializable {
 
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT * FROM (");
-        sql.append("SELECT TOP ").append(pageSize).append(" * FROM (");
-        sql.append("SELECT TOP ").append(pageSize + firstRecord).append(" * ");
+        
+        if(dbVendor.equalsIgnoreCase("mssql")) {
+            sql.append("SELECT TOP ").append(pageSize).append(" * FROM (");
+            sql.append("SELECT TOP ").append(pageSize + firstRecord).append(" * ");
+            
+        } else if(dbVendor.equalsIgnoreCase("mysql")) {
+            sql.append("SELECT").append(" * FROM (");
+            sql.append("SELECT").append(" * ");
+        }
 
         if(sortField == null) {
-            sql.append("FROM EMPLOYEE ORDER BY ID ASC) as foo ORDER BY ID DESC) ");
-            sql.append("as bar ORDER BY ID ASC");
+            if(dbVendor.equalsIgnoreCase("mssql")) {
+                sql.append("FROM EMPLOYEE ORDER BY ID ASC) as foo ORDER BY ID DESC) ");
+                sql.append("as bar ORDER BY ID ASC");
+                
+            } else if(dbVendor.equalsIgnoreCase("mysql")) {
+                sql.append("FROM EMPLOYEE ORDER BY ID ASC LIMIT ");
+                sql.append(pageSize).append(") as foo ORDER BY ID DESC LIMIT ");
+                sql.append(pageSize + firstRecord).append(") ");
+                sql.append("as bar ORDER BY ID ASC");
+            }
         } else {
             String orderDir = sortOrder ? "DESC" : "ASC";
             sql.append("FROM EMPLOYEE ORDER BY ").append(sortField);
-            sql.append(" ").append(orderDir);
-            sql.append(") as foo ORDER BY ");
-            sql.append(sortField).append(" ");
-            sql.append(sortOrder ? "ASC" : "DESC");
+            if(dbVendor.equalsIgnoreCase("mssql")) {
+                sql.append(" ").append(orderDir);
+                sql.append(") as foo ORDER BY ");
+                sql.append(sortField).append(" ");
+                sql.append(sortOrder ? "ASC" : "DESC");
+                
+            } else if(dbVendor.equalsIgnoreCase("mysql")) {
+                sql.append(" ").append(orderDir).append(" LIMIT ").append(pageSize);
+                sql.append(") as foo ORDER BY ");
+                sql.append(sortField).append(" ");
+                sql.append(sortOrder ? "ASC" : "DESC").append(" LIMIT ");
+                sql.append(pageSize + firstRecord);
+                
+            }
             sql.append(") ");
             sql.append("as bar ORDER BY ").append(sortField).append(" ");
             sql.append(orderDir);
         }
+        
+        //System.out.println("*** " + sql.toString());
 
         empList.clear();
 
@@ -113,11 +142,20 @@ public class SpringJDBCEmployeeDAO implements IEmployeeDAO, Serializable {
         return empList;
     }
 
+    public String getDbVendor() {
+        return dbVendor;
+    }
+
+    public void setDbVendor(String dbVendor) {
+        this.dbVendor = dbVendor;
+    }
+    
+    
+
     @Override
     public int getTotalRecordCount(String table) {
-        RowCountCallbackHandler countCallback = new RowCountCallbackHandler();  // not reusable
-        jdbcTemplate.query("SELECT * FROM EMPLOYEE", countCallback);
-        return countCallback.getRowCount();
+        long num = jdbcTemplate.queryForLong("SELECT COUNT(*) AS NumEmployee FROM EMPLOYEE");
+        return (int)num;
     }
     
     public static void main(String[] args) {

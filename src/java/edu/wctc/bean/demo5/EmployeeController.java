@@ -31,7 +31,6 @@ import org.springframework.web.jsf.FacesContextUtils;
 @Named("employeeController")
 @Scope("session")
 public class EmployeeController implements Serializable {
-
     private static final long serialVersionUID = 1L;
     private final static Logger logger = Logger.getLogger("MyLogger");
     private static int pgSize;

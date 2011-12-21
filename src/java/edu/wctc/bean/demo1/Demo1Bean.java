@@ -1,6 +1,7 @@
 package edu.wctc.bean.demo1;
 
 // IMPORTANT: this demo uses the JSF faces version of these classes
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -15,7 +16,8 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class Demo1Bean {
+public class Demo1Bean implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String msg = "Hello World";
 
     public Demo1Bean() {

@@ -23,7 +23,7 @@ import javax.validation.constraints.Pattern;
 @ManagedBean
 @SessionScoped
 public class NumberGuess2 implements Serializable {
-
+    private static final long serialVersionUID = 1L;
 //    These can be used when you need a custom message. The Min and Max
 //    annotation used below do not allow custom messages.
 //    @DecimalMin(value="1", message="Value must be greater than 0")

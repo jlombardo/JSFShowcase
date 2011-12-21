@@ -3,17 +3,23 @@
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-                         http://www.springframework.org/schema/security
-                         http://www.springframework.org/schema/security/spring-security-3.1.xsd
-                         http://www.springframework.org/schema/context 
-                         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/jee 
+                        http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+                        http://www.springframework.org/schema/tx 
+                        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
  
     
     <!-- use this to set a properties file location and provide access
          to key=value pairs via Spring EL expressions (see dataSource below) -->
-    <context:property-placeholder location="file:/Users/jlombardo/jdbc.config.properties"/>
+    <context:property-placeholder location="file:/myappconfig/jdbc.config.properties"/>
     
     <!-- Scans within the base package of the application for @Components to configure as beans -->
     <context:component-scan base-package="edu.wctc.bean.demo5"/>
@@ -64,15 +70,24 @@
         </authentication-provider>
     </authentication-manager>
 
-    <!-- Database connection properties defined in jdbc.config.properties file
+    <!-- Server managed connection pool accessed via JNDI -->
+    <jee:jndi-lookup id="dataSource" jndi-name="${jndi.name}"/>
+    <!-- For web apps use the app server's transaction management feature -->
+    <beans:bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+    <!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+        
+    <!-- Prefer jndi access to server-managed connection pool (see above)
+         Database connection properties defined in jdbc.config.properties file
          (see above) and accessed via Spring EL. Note that the users and authorities
-         table schema are dictated by Spring (see Spring documentation) -->
+         table schema are dictated by Spring (see Spring documentation) 
     <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
       <beans:property name="driverClassName" value="${jdbc.driver.class}" />
       <beans:property name="url" value="${jdbc.url}" />
       <beans:property name="username" value="${jdbc.username}" />
       <beans:property name="password" value="${jdbc.password}" />
     </beans:bean>
+    -->
 
     <!-- Automatically receives AuthenticationEvent messages -->
     <beans:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
