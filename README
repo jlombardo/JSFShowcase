@@ -6,6 +6,10 @@ For database access you will need a schema similar to the one provided in the du
 
 mysql-schema-and-data.sql
 
+You will also need a properties file like this (included, modify as needed):
+
+jdbc.config.properties
+
 Here's a list of the libraries you will need to add to your project (not including the database driver jar because you can use whatever you need):
 
 com.springsource.net.sf.cglib-2.2.0.jar
