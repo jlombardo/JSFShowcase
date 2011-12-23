@@ -15,7 +15,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:cc="http://java.sun.com/jsf/composite">
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+>
     <h:head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
         <meta name="Keywords" content="JSF WCTC JAVA"/>
@@ -41,7 +43,7 @@
         
         <!-- Body -->
         <h:panelGrid columns="1" cellpadding="0">
-            <h:outputText value="Welcome" styleClass="bigHead" />
+            <h:outputText value="Welcome #{request.userPrincipal.name}" styleClass="bigHead" />
             <h:outputText value="(Updated Dec. 20, 2011)" style="font-size:small;color:blue;" />
         </h:panelGrid>
         
@@ -98,7 +100,10 @@
                 This page demonstrates secure access via Spring Security and 
                 forces a login for a user with username=member and password=member</li>
         </ul>
-
+        <hr/>
+        <c:if test="#{sec:isAuthenticated()}">
+            <a href="/JSFShowcase/j_spring_security_logout">Log Out</a>
+        </c:if>
 
     </h:body>
 

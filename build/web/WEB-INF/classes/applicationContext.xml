@@ -18,15 +18,18 @@
  
     
     <!-- use this to set a properties file location and provide access
-         to key=value pairs via Spring EL expressions (see dataSource below) -->
+         to key=value pairs via Spring EL expressions (see dataSource below).
+         There are two reasons for doing this: 1) certain details can be configured
+         outside of the application .war, such as port numbers; and 2) sensitive 
+         information, such as a password, can be hidden from the developer of the app -->
     <context:property-placeholder location="file:/myappconfig/jdbc.config.properties"/>
     
     <!-- Scans within the base package of the application for @Components to configure as beans -->
     <context:component-scan base-package="edu.wctc.bean.demo5"/>
     <context:annotation-config/>
 
-    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled">
-    </global-method-security>
+    <!-- begin Spring Security config -->
+    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
 
     <http auto-config="true" access-denied-page="/faces/accessDenied.xhtml">
             
@@ -72,7 +75,9 @@
 
     <!-- Server managed connection pool accessed via JNDI -->
     <jee:jndi-lookup id="dataSource" jndi-name="${jndi.name}"/>
-    <!-- For web apps use the app server's transaction management feature -->
+    <!-- For web apps use the app server's transaction management capabilities, 
+         but only when using the app server's connection pool. See the 
+         Spring documentation for other types of transaction managers. -->
     <beans:bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
     <!-- enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="false" />
@@ -89,6 +94,6 @@
     </beans:bean>
     -->
 
-    <!-- Automatically receives AuthenticationEvent messages -->
+    <!-- (Optional) Automatically receives and logs AuthenticationEvent messages -->
     <beans:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
     </beans:beans>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="demo3/page4.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="demo4/guess3.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="demo4/guess2.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="member/page1.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="demo5/grid1.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="member/page2.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="demo3/._page2.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="demo5/grid2.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="demo5/._grid2.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="demo5/._grid1.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="demo4/guess4.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="demo3/._page4.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="accessDenied.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="admin/._page2.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="demo1/index.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="demo4/._guess4.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="demo3/page3.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="demo4/guess1.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="demo3/._page5.xhtml" x="900" y="900" zoom="true"/>
+        <Node id="demo5/grid3.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="mainTemplate.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="demo3/page5.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="demo6/page2.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="demo4/._guess3.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="admin/._page1.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="login.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="demo2/._index.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="member/._page1.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="demo4/._guess1.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="demo4/._guess2.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="demo3/page2.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="admin/page2.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="bottom.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="admin/page1.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="demo6/page1.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="member/._page2.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="demo2/index.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="index.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="demo6/._page1.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="demo3/page1.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="demo3/._page1.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="demo6/._page2.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="demo3/._page3.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="top.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="demo1/._index.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="demo5/._grid3.xhtml" x="1400" y="600" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

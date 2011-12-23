@@ -25,7 +25,8 @@
 
     <ui:define name="content">
         <h:panelGrid columns="1" cellspacing="8">
-            <h:outputText style="font-size: xx-large;" value="Welcome Member :: Secure Page 2"/>
+            <h:outputText style="font-size: xx-large;" value="Welcome Member: #{request.userPrincipal.name}"/>
+            <h:outputText style="font-size: xx-large;" value="Secure Page 2"/>
             <h:link value="&lt;&lt; Back to Member Page 1" outcome="page1" />
         </h:panelGrid>
 	

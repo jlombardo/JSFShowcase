@@ -25,7 +25,8 @@
 
     <ui:define name="content">
         <h:panelGrid columns="1" cellspacing="8">
-            <h:outputText style="font-size: xx-large;" value="Welcome Administrator :: Secure Page 1"/>
+            <h:outputText style="font-size: xx-large;" value="Welcome Administrator #{request.userPrincipal.name}"/>
+            <h:outputText style="font-size: xx-large;" value="Secure Page 1"/>
             <h:link value="Go to Admin Page 2 &gt;&gt;" outcome="page2" />
         </h:panelGrid>
 	
