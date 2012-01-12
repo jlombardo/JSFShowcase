@@ -2,15 +2,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <!--
-    DEMO 5: Version 1:
-    In this demo we'll combine a JSF dataTable component with database access.
-    But the big difference in this demo is that the ManagedBean is of a very
-    different type. JSF has its own ManagedBean classes, but there is another
-    type called a CDI ManagedBean. CDI stands for Contexts and Dependency
-    Injection and is new to JEE6. Basically what this does is it gives you
-    numerous "Spring" like features, including dependency injection, that
-    make life easier for programmers. Check out the "EmployeeController"
-    class, which is the CDI ManagedBean in this demo.
+    DEMO 5: Page 3:
+    In this demo we'll use two Primefaces data tables where making a selection
+    in the top grid causes the bottom grid to update via ajax.
 -->
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -44,7 +38,7 @@
                          onRowSelectUpdate="matchTable">
                 
                 <f:facet name="header">
-                    Plant Categories
+                    Plant Categories: Selection changes Plant List Below
                 </f:facet>
                 <p:column>
                     <f:facet name="header">

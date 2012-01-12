@@ -1,4 +1,4 @@
-This Netbeans project provides numerous examples of using JSF 2. None of the 3rd party libraries are included so users will have to link them up manually. A list of the libraries needed is at the end of this document.
+This Netbeans project provides numerous examples of using JSF 2 and the Spring. None of the 3rd party libraries are included so users will have to link them up manually. A list of the libraries needed is at the end of this document.
 
 In addtion the project provides samples for using PrimesFaces 2.2.1, facelets, i18n, CDI and Spring Core and Spring Security. An important additional feature is the use of a remote properties file to store deployment-environment-specific or sensitive information outside of the project. And, perhaps, most valuable is sample code for using Spring Security in a JSF2 application.
 

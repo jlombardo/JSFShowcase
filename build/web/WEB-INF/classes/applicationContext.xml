@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-                        http://www.springframework.org/schema/security
-                        http://www.springframework.org/schema/security/spring-security-3.1.xsd
-                        http://www.springframework.org/schema/context 
-                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
-                        http://www.springframework.org/schema/jee 
-                        http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
-                        http://www.springframework.org/schema/tx 
-                        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:sec="http://www.springframework.org/schema/security"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+          http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.1.xsd
+          http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+          http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+          http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+          http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+">  
     
     <!-- use this to set a properties file location and provide access
          to key=value pairs via Spring EL expressions (see dataSource below).
@@ -29,23 +35,23 @@
     <context:annotation-config/>
 
     <!-- begin Spring Security config -->
-    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
+    <sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
 
-    <http auto-config="true" access-denied-page="/faces/accessDenied.xhtml">
+    <sec:http auto-config="true" access-denied-page="/faces/accessDenied.xhtml">
             
         <!-- On Glassfish, dev ports are 8080 and 8181, whereas on
              production its 80 and 443 -->
-        <port-mappings>
-            <port-mapping http="${http.port}" https="${https.port}"/>
-        </port-mappings>
+        <sec:port-mappings>
+            <sec:port-mapping http="${http.port}" https="${https.port}"/>
+        </sec:port-mappings>
 
-        <intercept-url 
+        <sec:intercept-url 
             pattern="/faces/admin/**" 
             access="ROLE_ADMIN" requires-channel="https" />
-        <intercept-url 
+        <sec:intercept-url 
             pattern="/faces/member/**" 
             access="ROLE_MEMBER, ROLE_ADMIN" requires-channel="https" />
-        <intercept-url 
+        <sec:intercept-url 
             pattern="/**" 
             access="IS_AUTHENTICATED_ANONYMOUSLY" />
         
@@ -53,32 +59,32 @@
         <http-basic />
         -->
         <!-- Use custom form for login -->
-        <form-login 
+        <sec:form-login 
             login-processing-url="/j_spring_security_check"
             login-page="/faces/login.xhtml" />
             
-        <logout logout-success-url="/faces/index.xhtml" />
+        <sec:logout logout-success-url="/faces/index.xhtml" />
 
-    </http>
+    </sec:http>
  
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource" />
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider>
+            <sec:jdbc-user-service data-source-ref="dataSource" />
             <!-- if not using a database for accounts, hard-code them here
             <user-service>
                 <user name="admin" password="????" authorities="ROLE_ADMIN" />
                 <user name="member" password="????" authorities="ROLE_MEMBER" />
             </user-service>
             -->
-        </authentication-provider>
-    </authentication-manager>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
 
     <!-- Server managed connection pool accessed via JNDI -->
     <jee:jndi-lookup id="dataSource" jndi-name="${jndi.name}"/>
     <!-- For web apps use the app server's transaction management capabilities, 
          but only when using the app server's connection pool. See the 
          Spring documentation for other types of transaction managers. -->
-    <beans:bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+    <bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
     <!-- enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="false" />
         
@@ -95,5 +101,5 @@
     -->
 
     <!-- (Optional) Automatically receives and logs AuthenticationEvent messages -->
-    <beans:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
-    </beans:beans>
+    <bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+</beans>
